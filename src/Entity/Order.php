@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Order
 {
     public const STATUSES = ['En préparation', 'Prêt', 'Emporté'];
-
+    
     /**
      * @var int
      * @ORM\Column(type="integer")
@@ -45,6 +45,11 @@ class Order
      * @ORM\OneToMany(targetEntity="App\Entity\Selection", mappedBy="myOrder", orphanRemoval=true, fetch="EAGER", cascade={"persist"})
      */
     private $selections;
+
+    /**
+     * @ORM\Column(type="string", length=255, options={"default": "inconnu"})
+     */
+    private $name;
 
     public function __construct()
     {
@@ -129,6 +134,18 @@ class Order
 
             $this->amount -= $selection->getQuantity() * $selection->getProduct()->getPrice();
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

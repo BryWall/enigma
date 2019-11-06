@@ -1,4 +1,5 @@
 App\Entity\Order:
   order_{1..50}:
+    name: <name()>
     status: <randomElement(['En préparation', 'Prêt', 'Emporté'])>
     amount: <numberBetween(1, 100)>

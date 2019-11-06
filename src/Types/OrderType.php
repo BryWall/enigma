@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Types;
 
 use App\Entity\Order;
+use Doctrine\DBAL\Types\StringType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -16,6 +17,7 @@ class OrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('name')
             ->add('status', ChoiceType::class, [
                'choices' => array_combine(Order::STATUSES, Order::STATUSES)
             ])
